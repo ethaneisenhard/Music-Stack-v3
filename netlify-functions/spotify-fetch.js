@@ -1,64 +1,43 @@
 'use strict';
 const fetch = require ('node-fetch');
 
-const {
-  SPOTIFY_CLIENT_ID,
-  SPOTIFY_CLIENT_SECRET_ID,
-  SPOTIFY_REDIRECT_URI
-} = process.env;
+const SPOTIFY_CLIENT_ID ="2e1b117716b64365ac848c74c13e67a0";
+const SPOTIFY_REDIRECT_URI ="http://localhost:8888/.netlify/functions/spotify-fetch";
+const SPOTIFY_CLIENT_SECRET_ID ="dd393977f4aa4630b9f5aab2d734b88a";
 
-exports.handler = (event, context, callback) => {
-
+exports.handler = async event => {
   let params = event.queryStringParameters;
   const code = params.code;
+ 
+  let token;
+  try {
+    token = await getAccessToken(code);
+  } catch (e) {
+    return {
+      statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true
+      },
+      body: JSON.stringify({
+        error: "I AM AN ERROR MESSAGE"
+      })
+    };
+  }
 
-  let done = (err, res) => {
-    if (err) {
-      callback(null, {
-        statusCode: 400,
-        body: JSON.stringify({
-          type: "error"
-        }),
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers":
-            "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token"
-        }
-      });
-    } else {
-      callback(null, {
-        statusCode: 200,
-        body: JSON.stringify({
-          type: "success",
-          done: res
-        }),
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers":
-            "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token"
-        }
-      });
-    }
-  };
-
-  let getAccessToken = code => {
+  async function getAccessToken(code) {
     let url = "https://accounts.spotify.com/api/token";
-    let encoded = new Buffer(SPOTIFY_CLIENT_ID + ":" + SPOTIFY_CLIENT_SECRET_ID).toString(
-      "base64"
-    );
-    console.log("encoded = " + encoded);
+    let encoded = new Buffer(SPOTIFY_CLIENT_ID + ":" + SPOTIFY_CLIENT_SECRET_ID).toString("base64");
 
     let params = {
-      grant_type: "authorization_code",
       code: code, 
-      redirect_uri: SPOTIFY_REDIRECT_URI
+      redirect_uri: SPOTIFY_REDIRECT_URI, 
+      grant_type: "authorization_code",
     };
 
-    const formParams = Object.keys(params)
-      .map(key => {
-        return encodeURIComponent(key) + "=" + encodeURIComponent(params[key]);
-      })
-      .join("&");
+    const formParams = Object.keys(params).map((key) => {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+    }).join('&');
 
     return fetch(url, {
       method: "POST",
@@ -73,22 +52,22 @@ exports.handler = (event, context, callback) => {
         return response.json();
       })
       .then(json => {
-        done(null, {
-          json: json
-        });
+        var access_token = json.access_token
+        return access_token
       })
       .catch(error => {
-        done({
-          error: error
-        });
+        console.log(error)
       });
-  };
-
-
-  try {
-    getAccessToken(code);
-  } catch (error) {
-    done(error);
   }
-  
-};
+
+  return {
+    statusCode: 302,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true,
+      "Cache-Control": "no-cache",
+      Location: `${"http://localhost:8888/music"}?token=${token}`
+    },
+    body: JSON.stringify({})
+  };
+}
