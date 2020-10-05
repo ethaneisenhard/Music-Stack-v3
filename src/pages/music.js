@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SpotifyPlayer from "react-spotify-web-playback"
@@ -11,21 +11,27 @@ import { QueueContext } from "../components/QueueContext"
 import SavedTracks from "../spotify/components/savedTracks"
 
 function Music() {
-  let url_string = window.location.href
-  let url = new URL(url_string)
-  const token = url.searchParams.get("token")
-
-  localStorage.setItem("token", token)
-  const localToken = localStorage.getItem("token")
-
   const [playSong, setPlaySong] = useState(null)
+  var token;
+
+  useEffect(() => {
+    var url_string
+    var url
+  
+
+    if (typeof window !== "undefined") {
+      url_string = window.location.href
+      url = new URL(url_string)
+      token = url.searchParams.get("token")
+      localStorage.setItem("token", token)
+    }
+  })
 
   return (
     <Layout>
       <SEO title="Top 20 Spotify Songs" />
 
       <QueueContext.Provider value={{ playSong, setPlaySong }}>
-
         <MainView>
           <TopSongs />
         </MainView>
@@ -41,7 +47,7 @@ function Music() {
               trackArtistColor: "#ccc",
               trackNameColor: "#fff",
             }}
-            token={localToken}
+            token={token}
             uris={[playSong]}
           />
         </QueueController>
