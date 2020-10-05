@@ -1,0 +1,27 @@
+.home{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    height: 100vh;
+    padding: 0em 1em;
+}
+
+.home button{
+    margin: 2em 0em;
+}
+
+.home a{
+    margin: 2em 0em;
+}
+
+.home .signInToSpotify{
+    text-decoration: none;
+    width: 200px;
+    margin: 0 auto;
+    border: 1px solid white;
+    padding: 10px 18px;
+    border-radius: 4px;
+}

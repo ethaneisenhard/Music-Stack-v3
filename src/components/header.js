@@ -7,7 +7,6 @@ const headerStyle = {
   height: "5vh"
 };
 
-
 const Header = ({ siteTitle }) => (
   <header style={headerStyle}>
     <div>

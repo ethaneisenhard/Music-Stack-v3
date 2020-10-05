@@ -1,9 +1,9 @@
 'use strict';
 const fetch = require ('node-fetch');
 
-const SPOTIFY_CLIENT_ID ="2e1b117716b64365ac848c74c13e67a0";
+const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const SPOTIFY_REDIRECT_URI ="http://localhost:8888/.netlify/functions/spotify-fetch";
-const SPOTIFY_CLIENT_SECRET_ID ="dd393977f4aa4630b9f5aab2d734b88a";
+const SPOTIFY_CLIENT_SECRET_ID = process.env.SPOTIFY_CLIENT_SECRET_ID;
 
 exports.handler = async event => {
   let params = event.queryStringParameters;
