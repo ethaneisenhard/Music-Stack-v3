@@ -2,7 +2,8 @@
 const fetch = require ('node-fetch');
 
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
-const SPOTIFY_REDIRECT_URI ="http://localhost:8888/.netlify/functions/spotify-fetch";
+const SPOTIFY_REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI;
+// const SPOTIFY_REDIRECT_URI ="http://localhost:8888/.netlify/functions/spotify-fetch";
 const SPOTIFY_CLIENT_SECRET_ID = process.env.SPOTIFY_CLIENT_SECRET_ID;
 
 exports.handler = async event => {
