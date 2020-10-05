@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import useTopSongs from "../hooks/useTopSongs"
 import { addToQueueSpotify } from "../requests/addToQueueSpotify"
 import { QueueContext } from "../../components/QueueContext.js"
@@ -7,7 +7,11 @@ function TopSongs() {
   const { status, data, error, isFetching } = useTopSongs()
   const { playSong, setPlaySong } = useContext(QueueContext)
 
-  const localToken = localStorage.getItem("token")
+  var localToken;
+
+  useEffect(() => {
+    localToken = localStorage.getItem("token")
+  })
 
   const handleOnClick = event => {
     var getSongURI = event.target.getAttribute("data-song")
@@ -19,8 +23,6 @@ function TopSongs() {
 
     addToQueueSpotify(getSongURI, localToken)
   }
-
-  console.log(data)
 
   return (
     <>
