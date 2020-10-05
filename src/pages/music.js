@@ -22,16 +22,12 @@ function Music() {
 
   return (
     <Layout>
-      <SEO title="Page two" />
+      <SEO title="Top 20 Spotify Songs" />
 
       <QueueContext.Provider value={{ playSong, setPlaySong }}>
-        <SideBarMenu>
-          <Playlists />
-        </SideBarMenu>
 
         <MainView>
           <TopSongs />
-          <SavedTracks/>
         </MainView>
 
         <QueueController>

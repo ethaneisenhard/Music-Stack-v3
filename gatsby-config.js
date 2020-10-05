@@ -1,15 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `By Ethan Eisenhard`,
+    description: `Find out your Top 20 Spotify Songs based on calculated affinity.`,
+    author: `@ethan.eisenhard`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
+        name: `By Ethan Eisenhard`,
         short_name: `starter`,
         start_url: `/`,
         background_color: `#663399`,

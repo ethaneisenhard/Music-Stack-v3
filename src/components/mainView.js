@@ -1,19 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
-import "./layout.css"
 
 const viewContainerStyle = {
   padding: "10px",
-  width: "100%", 
   overflow: "auto",
   display: "flex",
   flexFlow: "column"
-};
-
-const songContainerStyle = {
-  padding: "10px",
-  width: "100%", 
-  display: "flex"
 };
 
 const MainApp = ({ children }) => {
@@ -21,9 +13,10 @@ const MainApp = ({ children }) => {
     <>
         <section style={viewContainerStyle}>
           <header>
-            <h1 style={{"textAlign": "center"}}>Main View</h1>
+            <h1 style={{"textAlign": "center", "marginBottom": ".5em"}}>Top 20 Spotify Songs</h1>
+            <p style={{"textAlign": "center", "fontSize": "18px"}}>Change device, in bottom right corner of the play bar, to Spotify Web Player to use in the Browser</p>
           </header>
-          <section style={songContainerStyle}>
+          <section className="songContainer">
               {children}
           </section>
         </section>

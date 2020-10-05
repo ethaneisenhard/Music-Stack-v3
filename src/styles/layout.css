@@ -1,0 +1,66 @@
+.app-container {
+    padding-bottom: 120px;
+}
+
+.songContainer {
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+    justify-content: center;
+}
+
+.songContainer h3{
+    margin-bottom: .5em;
+}
+
+.song {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin: 1em;
+    width: 300px;
+}
+
+.song button{
+    margin: 3px 0em;
+}
+
+.song-name{
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.artist-name{
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.song-name:hover, .artist-name:hover{
+    text-decoration: underline;
+}
+
+.artist-info{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    flex: 1;
+    margin-bottom: 1em;
+}
+
+.buttonsContainer{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    flex: 1;
+    margin-top: 1em;
+}
+
+.song button img{
+    margin-right: 5px;
+}

@@ -11,7 +11,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import { ReactQueryDevtools } from "react-query-devtools"
 
 import Header from "./header"
-import "./layout.css"
+import "../styles/global.css"
+import "../styles/layout.css"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -26,13 +27,13 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
       <main>
-        <section class="app-container">
+        <section className="app-container">
         {children}
         </section>
       </main>
-      <ReactQueryDevtools initialIsOpen={true} />
+      {/* <ReactQueryDevtools initialIsOpen position={"top-right"}/> */}
     </>
   )
 }

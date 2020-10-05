@@ -1,11 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
-import "./layout.css"
 
 const style = {
-    position: "absolute",
+    position: "fixed",
     bottom: "0",
-    width: "97%"
+    width: "100%"
 };
 
 const QueueController = ({ children }) => {
